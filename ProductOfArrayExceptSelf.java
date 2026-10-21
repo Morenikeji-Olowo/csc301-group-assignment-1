@@ -1,0 +1,37 @@
+import java.util.Arrays;
+
+public class ProductOfArrayExceptSelf {
+
+    public int[] productExceptSelf(int[] numbers) {
+        int n = numbers.length;
+        int[] result = new int[n];
+        Arrays.fill(result, 1);
+
+        int left = 1;
+        int right = 1;
+
+        for (int i = 0; i < n; i++) {
+            int j = n - 1 - i;
+
+            result[i] = result[i] * left;
+            left = left * numbers[i];
+
+            result[j] = result[j] * right;
+            right = right * numbers[j];
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        ProductOfArrayExceptSelf solver = new ProductOfArrayExceptSelf();
+
+        int[] test1 = {1, 2, 3, 4};
+        int[] output1 = solver.productExceptSelf(test1);
+        System.out.println(Arrays.toString(output1));
+
+        int[] test2 = {-1, 1, 0, -3, 3};
+        int[] output2 = solver.productExceptSelf(test2);
+        System.out.println(Arrays.toString(output2));
+    }
+}
